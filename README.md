@@ -14,6 +14,7 @@ serverPort
 
 Both Frontend and Backend can be run simultaneously with the package concurrently, In the root folder:
 ```bash
+  npm i
   npm start
 ```
 
