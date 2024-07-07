@@ -2,7 +2,7 @@ const AqiService = require('../service/aqi.service');
 const CONSTANTS = require('../../../helpers/constants');
 class AqiController {
     async getData(req, res){
-        console.log("🎈 GetData API Invoked 🪄");
+        console.log(`🎈 GetData API Invoked 🪄  at ${(new Date()).toUTCString()}`);
         const data = await AqiService.getAllData();
         const max_records = req.query.max || CONSTANTS.COMMON.MAX_RECORDS;
         let response = {
@@ -30,7 +30,7 @@ class AqiController {
     }
 
     async getLatestRecord(req, res){
-        console.log("🎈 GetLatestRecord API Invoked 🪄");
+        console.log(`🎈 GetLatestRecord API Invoked 🪄  at ${(new Date()).toUTCString()}`)
         const data = await AqiService.getLatestRecord();
         let response = {
             message: "",
@@ -51,7 +51,7 @@ class AqiController {
     }
 
     async getLast1WeekData_byHourAvg(req, res){
-        console.log("🎈 GetLast1WeekData_byHourAvg API Invoked 🪄");
+        console.log(`🎈 GetLast1WeekData_byHourAvg API Invoked 🪄  at ${(new Date()).toUTCString()}`)
         return res.send("🚧 API Under Construction 🚧");
         const data = await AqiService.getLast1WeekData_byAvg();
         let response = {
@@ -73,7 +73,7 @@ class AqiController {
     }
 
     async getLast1WeekData_byHour(req, res){
-        console.log("🎈 GetLast1WeekData_byHour API Invoked 🪄");
+        console.log(`🎈 GetLast1WeekData_byHour API Invoked 🪄  at ${(new Date()).toUTCString()}`)
         const data = await AqiService.getLast1WeekData();
         let response = {
             message: "",

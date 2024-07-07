@@ -28,9 +28,7 @@ class AqiService {
 
     async getLast1WeekData(){
         const data = await this.getAllData();
-        let last1WeekData = {
-            // "day 1 timestamp" : {"1AM":all_12AM to 1AM values, "2AM":all_1AM to 2AM values, ...}
-        };
+        let last1WeekData = {}
         const today = new Date();
         for (let i = 1; i <= 7; i++){
             const day = new Date(today);
