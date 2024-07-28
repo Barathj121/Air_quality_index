@@ -1,16 +1,17 @@
 import React from 'react';
-import { FaTachometerAlt, FaMap, FaTable, FaCloudSun, FaCalendarAlt } from 'react-icons/fa';
-import './Sidebar.css'; // Ensure you have a Sidebar.css file in the same directory
+import { FiHome, FiMap, FiTable, FiCalendar, FiCloud } from 'react-icons/fi';
 
 function Sidebar() {
   return (
-	<div className="sidebar">
-	  <h3><FaTachometerAlt /> Dashboard</h3>
-	  <h3><FaMap /> AQI Map</h3>
-	  <h3><FaTable /> Data Tables</h3>
-	  <h3><FaCloudSun /> Air Quality Forecast</h3>
-	  <h3><FaCalendarAlt /> Calendar History</h3>
-	</div>
+    <div className="sidebar">
+      <ul>
+        <li><FiHome /> Dashboard</li>
+        <li><FiMap /> AQI Map</li>
+        <li><FiTable /> Data Tables</li>
+        <li><FiCloud /> Air Quality Forecast</li>
+        <li><FiCalendar /> Calendar History</li>
+      </ul>
+    </div>
   );
 }
 

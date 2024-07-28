@@ -1,16 +1,23 @@
-import React from 'react'
-import './AirQualityMeter.css'
+import React from 'react';
+import ReactSpeedometer from 'react-d3-speedometer';
 
 function AirQualityMeter({ type, value }) {
   return (
-    <div className="air-quality-meter">
-      <h3>{type}</h3>
-      <div className="meter">
-        <div className="meter-bar" style={{ width: `${value}%` }}></div>
-      </div>
-      <p>{value}</p>
+    <div className="air-quality-meter text-center">
+      <h4>{type}</h4>
+      <ReactSpeedometer
+        maxValue={500}
+        value={value}
+        needleColor="red"
+        startColor="green"
+        segments={10}
+        endColor="red"
+        width={150}
+        height={120}
+        textColor="black"
+      />
     </div>
-  )
+  );
 }
 
-export default AirQualityMeter
+export default AirQualityMeter;

@@ -1,21 +1,98 @@
+/* App.css */
 .app {
-    display: flex;
-  }
-  
-  .sidebar {
-    width: 250px;
-    background-color: #f8d7da;
-    padding: 20px;
-  }
-  
-  .main-content {
-    flex-grow: 1;
-    padding: 20px;
-  }
-  
-  .meters-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #f0a1a8;
+  padding: 20px;
+  color: white;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar ul li svg {
+  margin-right: 10px;
+  font-size: 1.5em;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.top-navbar .last-updated,
+.top-navbar .location {
+  display: flex;
+  align-items: center;
+}
+
+.last-updated svg,
+.location svg {
+  margin-right: 10px;
+}
+
+.dashboard-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.city-display-container {
+  flex-grow: 1;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.additional-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: 20px;
+  width: 200px;
+}
+
+.additional-info div {
+  background-color: #e0e0e0;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.meters-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+}

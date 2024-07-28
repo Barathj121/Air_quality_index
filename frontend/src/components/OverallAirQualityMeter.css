@@ -1,0 +1,20 @@
+.overall-air-quality-meter {
+    margin-bottom: 20px;
+  }
+  
+  .meter {
+    background-color: #f3f3f3;
+    height: 50px;
+    margin: 10px 0;
+    position: relative;
+  }
+  
+  .meter-bar {
+    background-color: #4caf50;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.5s;
+  }
+  
