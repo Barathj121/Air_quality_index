@@ -1,53 +1,69 @@
-import { useState } from 'react';
-import './App.css';
-import Sidebar from './components/Sidebar';
-import CityDisplay from './components/CityDisplay';
+import React, { useEffect, useState } from 'react';
 import AirQualityMeter from './components/AirQualityMeter';
-import TopNavbar from './components/TopNavbar';
-import LastUpdated from './components/LastUpdated';
-import Location from './components/Location';
+import SideNav from './components/SideNav';
+import TopNav from './components/TopNav';
+import './App.css';
 
-const airQualityData = [
-  { type: 'PM2.5', value: 50 },
-  { type: 'PM10', value: 30 },
-  { type: 'NO2', value: 40 },
-  { type: 'SO2', value: 20 },
-  { type: 'CO', value: 60 },
-  { type: 'Ozone', value: 70 },
-  { type: 'Temperature', value: 25 },
-  { type: 'Wind Speed', value: 10 },
-  { type: 'Humidity', value: 80 },
-  { type: 'Pressure', value: 90 }
-];
+const App = () => {
+  const [data, setData] = useState({
+    PM25: 50,
+    PM10: 30,
+    NO2: 40,
+    SO2: 20,
+    CO: 60,
+    Ozone: 50,
+    Temperature: 30,
+    WindSpeed: 40,
+    Humidity: 50,
+    WindDirection: 60,
+    SolarRadiation: 70,
+    Pressure: 80,
+  });
 
-function App() {
-  const overallAirQuality = airQualityData.reduce((sum, data) => sum + data.value, 0) / airQualityData.length;
+  // Simulate live updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setData(prevData => ({
+        ...prevData,
+        PM25: Math.random() * 500,
+        PM10: Math.random() * 500,
+        NO2: Math.random() * 500,
+        SO2: Math.random() * 500,
+        CO: Math.random() * 500,
+        Ozone: Math.random() * 500,
+        Temperature: Math.random() * 500,
+        WindSpeed: Math.random() * 500,
+        Humidity: Math.random() * 500,
+        WindDirection: Math.random() * 500,
+        SolarRadiation: Math.random() * 500,
+        Pressure: Math.random() * 500,
+      }));
+    }, 5000); // Update every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="app">
-      <Sidebar />
-      <div className="main-content">
-        <div className="top-navbar">
-          <LastUpdated />
-          <Location city="Coimbatore, Tamil Nadu" />
-        </div>
-        <h1>Air Quality Dashboard</h1>
-        <div className="dashboard-container">
-          <CityDisplay city="Coimbatore, Tamil Nadu" overallAirQuality={overallAirQuality} />
-          <div className="additional-info">
-            <div>Recommendations</div>
-            <div>Health Advice</div>
-            <div>Travel Suggestion</div>
+      <SideNav />
+      <main className="main-content">
+        <TopNav />
+        <div className="overview">
+          <AirQualityMeter type="Overall AQI" value={data.PM25} /> {/* Adjusted for example */}
+          <div className="suggestions">
+            <div className="suggestion">Recommendations</div>
+            <div className="suggestion">Health Advice</div>
+            <div className="suggestion">Travel Suggestion</div>
           </div>
         </div>
-        <div className="meters-container">
-          {airQualityData.map((data, index) => (
-            <AirQualityMeter key={index} type={data.type} value={data.value} />
+        <section className="details-grid">
+          {Object.keys(data).map((key) => (
+            <AirQualityMeter key={key} type={key} value={data[key]} />
           ))}
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
-}
+};
 
 export default App;

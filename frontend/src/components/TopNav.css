@@ -1,0 +1,21 @@
+/* TopNav.css */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  height: 80px; /* Increased height */
+}
+
+.last-updated, .location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.last-updated i, .location i {
+  color: #007bff;
+}
