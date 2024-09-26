@@ -1,0 +1,46 @@
+{
+  "recommendations": {
+    "0-50": {
+      "level": "GOOD",
+      "color": "GREEN",
+      "advice": "Air quality is good, indicating a favourable environment for outdoor activities and exercise.",
+      "health_advice": "No health impacts expected.",
+      "travel_suggestions": "Explore outdoor destinations and enjoy nature."
+    },
+    "51-100": {
+      "level": "SATISFACTORY",
+      "color": "YELLOW",
+      "advice": "Air quality is acceptable, but some sensitive individuals may experience minor discomfort.",
+      "health_advice": "Minor breathing discomfort for very sensitive individuals.",
+      "travel_suggestions": "No specific restrictions, but individuals with sensitivities should take precautions."
+    },
+    "101-200": {
+      "level": "MODERATE",
+      "color": "ORANGE",
+      "advice": "Air quality is moderately polluted, and sensitive individuals should limit prolonged outdoor activities. Others can continue with their daily activities.",
+      "health_advice": "Sensitive groups (children, elderly, people with respiratory issues) may experience discomfort.",
+      "travel_suggestions": "Recommend reducing outdoor exposure, particularly for children, older adults, and individuals with respiratory issues."
+    },
+    "201-300": {
+      "level": "POOR",
+      "color": "RED",
+      "advice": "Air quality is poor, and precautionary measures are necessary for everyone.",
+      "health_advice": "Health effects for everyone, more serious for sensitive groups.",
+      "travel_suggestions": "Limit outdoor travel and prioritize indoor attractions or areas with better air quality."
+    },
+    "301-400": {
+      "level": "VERY POOR",
+      "color": "PURPLE",
+      "advice": "Air quality is very poor, requiring significant precautions.",
+      "health_advice": "Emergency conditions - Entire population is more likely to be affected. Serious effects for sensitive groups.",
+      "travel_suggestions": "Postpone non-essential outdoor travel and focus on indoor activities."
+    },
+    "401-500": {
+      "level": "SEVERE",
+      "color": "MAROON",
+      "advice": "Air quality is severely polluted, and outdoor activities should be avoided by everyone.",
+      "health_advice": "Health warnings of emergency conditions. The entire population may experience more serious health effects.",
+      "travel_suggestions": "Discourage outdoor travel and prioritize indoor environments for safety."
+    }
+  }
+}
