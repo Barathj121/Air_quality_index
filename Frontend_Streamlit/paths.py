@@ -120,3 +120,4 @@ def aqi_map_page():
         - 3:00 PM: Entered area with poor AQI (AQI 80), considering route change.
         - 4:15 PM: Switched to better route, AQI improved to 30.
         """)
+aqi_map_page()

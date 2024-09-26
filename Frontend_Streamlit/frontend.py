@@ -1,41 +1,69 @@
 import streamlit as st
-import random
+import requests
 import plotly.graph_objects as go
 import json
-from PIL import Image
 
-# Load recommendations and health advice from JSON file
+# API URL for air quality data
+latest_api = "http://localhost:3030/api/aqi/latest"
+
+# Load recommendations and health advice from a JSON file
 def load_recommendations():
     with open('recommendations.json', 'r') as f:
         return json.load(f)
 
 recommendations = load_recommendations()
 
-# Function to get air quality data from an API or fallback to random data
+# Function to get air quality data from an API or fallback to placeholder data
 def get_air_quality_data():
     try:
-        # Assume a function or an API call is made here, e.g., requests.get(...)
-        # For now, let's simulate failure
-        raise Exception("API call failed")
-    except:
+        response = requests.get(latest_api)
+        if response.status_code == 200:
+            api_data = response.json().get("data", {})
+            
+            # Handle negative values and ensure proper data handling
+            def sanitize_value(value, default=0):
+                return value if value >= 0 else default
+            
+            data = {
+                "PM25": sanitize_value(api_data.get("PM2.5", 999)),
+                "PM10": sanitize_value(api_data.get("PM10", 999)),
+                "NO2": sanitize_value(api_data.get("NO2", 999)),
+                "SO2": sanitize_value(api_data.get("SO2", 999)),
+                "CO": sanitize_value(api_data.get("CO", 999)),
+                "Ozone": sanitize_value(api_data.get("Ozone", 999)),
+                "Temperature": api_data.get("Temperature", 999),
+                "Pressure": api_data.get("Pressure", 999),
+                "Humidity": api_data.get("Humidity", 999),
+                "WindSpeed": api_data.get("WS", 999),
+                "WindDirection": api_data.get("WD", 999),
+                "SolarRadiation": api_data.get("SR", 999),
+                "AQI": api_data.get("AQI", 999),
+            }
+            return data
+        else:
+            st.error(f"Error fetching data from API: {response.status_code}")
+            raise Exception("API call failed")
+    except Exception as e:
+        st.error(f"Failed to fetch data: {str(e)}")
+        # Fallback placeholder data
         data = {
-            "PM25": random.uniform(10, 50),
-            "PM10": random.uniform(20, 60),
-            "NO2": random.uniform(0, 5),
-            "SO2": random.uniform(10, 40),
-            "CO": random.uniform(0, 1),
-            "Ozone": random.uniform(0, 10),
-            "Temperature": random.uniform(20, 40),
-            "Pressure": random.uniform(950, 1050),
-            "Humidity": random.uniform(40, 80),
-            "WindSpeed": random.uniform(0, 5),
-            "WindDirection": random.uniform(0, 360),
-            "SolarRadiation": random.uniform(100, 300),
-            "AQI": random.randint(0, 500),
+            "PM25": 999,
+            "PM10": 999,
+            "NO2": 999,
+            "SO2": 999,
+            "CO": 999,
+            "Ozone": 999,
+            "Temperature": 999,
+            "Pressure": 999,
+            "Humidity": 999,
+            "WindSpeed": 999,
+            "WindDirection": 999,
+            "SolarRadiation": 999,
+            "AQI": 999,
         }
         return data
 
-# Function to get location data from an API or fallback to a default location
+
 def get_location():
     try:
         # Assume a function or an API call is made here
