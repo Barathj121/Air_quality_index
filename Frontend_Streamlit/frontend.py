@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import plotly.graph_objects as go
 import json
+import os
 
 # API URL for air quality data
 latest_api = "http://localhost:3030/api/aqi/latest"
@@ -72,7 +73,7 @@ def get_location():
     except:
         return "Coimbatore, India"
 
-# Function to display AQI meter with color coding
+# Function to display AQI meter with color coding and arrow mark
 def display_aqi_gauge(aqi):
     for key, value in recommendations['recommendations'].items():
         range_start, range_end = map(int, key.split('-'))
@@ -82,11 +83,12 @@ def display_aqi_gauge(aqi):
             break
 
     fig = go.Figure(go.Indicator(
-        mode="gauge+number",
+        mode="gauge+number+delta",
         value=aqi,
+        delta={'reference': 100, 'increasing': {'color': "red"}},
         title={'text': f"AQI: {aqi_level}"},
         gauge={
-            'axis': {'range': [0, 500]},
+            'axis': {'range': [0, 500], 'tickwidth': 1, 'tickcolor': "darkblue"},
             'bar': {'color': color},
             'steps': [
                 {'range': [0, 50], 'color': 'green'},
@@ -96,27 +98,33 @@ def display_aqi_gauge(aqi):
                 {'range': [301, 400], 'color': 'purple'},
                 {'range': [401, 500], 'color': 'maroon'},
             ],
+            'threshold': {
+                'line': {'color': "black", 'width': 4},
+                'thickness': 0.75,
+                'value': aqi
+            }
         }
     ))
     st.plotly_chart(fig, use_container_width=True)
 
 # Function to get appropriate icon for each pollutant
 def get_icon_for_pollutant(pollutant):
+    icons_path = 'icons/'  # Path to the icons folder
     icons = {
-        "PM25": "icons/dust_1.png",
-        "PM10": "icons/dust_11.png",
-        "NO2": "icons/dioxide_1.png",
-        "SO2": "icons/sulfur_1.png",
-        "CO": "icons/cobalt_1.png",
-        "Ozone": "icons/ozone_1.png",
-        "Temperature": "icons/temperature_1.png",
-        "Pressure": "icons/storm_1.png",
-        "Humidity": "icons/humidity_1.png",
-        "WindSpeed": "icons/wind_vane_1.png",
-        "WindDirection": "icons/wind_vane_1.png",
-        "SolarRadiation": "icons/sun_1.png",
+        "PM25": os.path.join(icons_path, "dust_1.png"),
+        "PM10": os.path.join(icons_path, "dust_11.png"),
+        "NO2": os.path.join(icons_path, "dioxide_1.png"),
+        "SO2": os.path.join(icons_path, "sulfur_1.png"),
+        "CO": os.path.join(icons_path, "cobalt_1.png"),
+        "Ozone": os.path.join(icons_path, "ozone_1.png"),
+        "Temperature": os.path.join(icons_path, "temperature_1.png"),
+        "Pressure": os.path.join(icons_path, "storm_1.png"),
+        "Humidity": os.path.join(icons_path, "humidity_1.png"),
+        "WindSpeed": os.path.join(icons_path, "wind_vane_1.png"),
+        "WindDirection": os.path.join(icons_path, "wind_vane_1.png"),
+        "SolarRadiation": os.path.join(icons_path, "sun_1.png"),
     }
-    return icons.get(pollutant, "icons/default.png")
+    return icons.get(pollutant, os.path.join(icons_path, "default.png"))
 
 # Function to get units for various metrics
 def get_unit_for_metric(metric):
@@ -141,7 +149,7 @@ def main():
                 padding-top: 2.2rem !important;
             }
             .recommendations-health-container {
-                font-size: 12px; /* Reduce font size for recommendations */
+                font-size: 2px; /* Reduce font size for recommendations */
             }
             .location-container {
                 display: flex;
@@ -151,7 +159,7 @@ def main():
                 margin-right: 10px;
             }
             .pollutant-container {
-                font-size: 14px; /* Increase font size for air quality measurements */
+                font-size: 16px; /* Increase font size for air quality measurements */
             }
         </style>
     """, unsafe_allow_html=True)
@@ -186,11 +194,11 @@ def main():
     pollutants = ["PM25", "PM10", "NO2", "SO2", "CO", "Ozone"]
     for idx, pollutant in enumerate(pollutants):
         with pollutant_cols[idx]:
-            st.image(get_icon_for_pollutant(pollutant), width=20)
+            st.image(get_icon_for_pollutant(pollutant), width=40)  # Increased icon size to 40px
             st.markdown(f"""
                 <div class="pollutant-container">
-                    <p style='font-size:12px;'><b>{pollutant}</b></p>
-                    <p style='font-size:12px;'>{data[pollutant]:.2f} µg/m³</p>
+                    <p style='font-size:14px;'><b>{pollutant}</b></p>
+                    <p style='font-size:14px;'>{data[pollutant]:.2f} µg/m³</p>
                 </div>
             """, unsafe_allow_html=True)
 
@@ -199,11 +207,11 @@ def main():
     others = ["Temperature", "Pressure", "Humidity", "WindSpeed", "WindDirection", "SolarRadiation"]
     for idx, other in enumerate(others):
         with more_cols[idx]:
-            st.image(get_icon_for_pollutant(other), width=20)
+            st.image(get_icon_for_pollutant(other), width=40)  # Increased icon size to 40px
             st.markdown(f"""
                 <div class="pollutant-container">
-                    <p style='font-size:12px;'><b>{other}</b></p>
-                    <p style='font-size:12px;'>{data[other]:.2f} {get_unit_for_metric(other)}</p>
+                    <p style='font-size:14px;'><b>{other}</b></p>
+                    <p style='font-size:14px;'>{data[other]:.2f} {get_unit_for_metric(other)}</p>
                 </div>
             """, unsafe_allow_html=True)
 
