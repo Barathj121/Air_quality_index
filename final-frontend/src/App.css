@@ -1,188 +1,217 @@
 /* Reset CSS to eliminate default margin and padding */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-body {
-  font-family: Arial, sans-serif; /* Adjust this as needed */
-  margin: 0; /* Remove default margin */
+/* Remove default margin and padding */
+
+
+html, body {
+    margin: 0; 
+    padding: 0; 
+    width:100%; 
+    font-family: Arial, sans-serif; 
+    color: black; 
+    overflow-x:hidden;
+    height: 100vh;
+    display: flex; /* Optional, if you want to use flexbox */
+    flex-direction: column; /* Optional */
+
 }
 
 /* Container for the app */
 .container {
-  padding: 20px; /* Add padding to the container */
+    max-width: 1480px; /* Maximum width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 1rem; /* Padding inside the container */
+    background-color: #f3f4f6; /* Light background color */
 }
 
-/* Other classes */
+/* Header styles */
 .header {
-  margin-bottom: 20px; /* Space below the header */
+    display: flex; /* Flexbox for alignment */
+    justify-content: space-between; /* Space between header items */
+    align-items: center; /* Center align items vertically */
+    margin-bottom: 1rem; /* Space below the header */
 }
 
-.card {
-  background-color: white; /* Card background */
-  border-radius: 5px; /* Rounded corners */
-  padding: 15px; /* Padding inside cards */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: shadow for depth */
-  margin-bottom: 20px; /* Space between cards */
-}
-
-.recommendations-container {
-  margin-top: 20px; /* Space above the recommendations */
-  padding: 10px; /* Optional padding */
-}
-
-/* Any other styles as needed */
-
-.container {
-    max-width: 1480px;
-    margin: 0 auto;
-    padding: 1rem;
-    background-color: #f3f4f6;
-}
-
-
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
+/* Title styles */
 .title {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.5rem; /* Title font size */
+    font-weight: bold; /* Bold title */
 }
 
+/* Location styles */
 .location {
-    background-color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    background-color: white; /* White background */
+    padding: 0.5rem 1rem; /* Padding for the location badge */
+    border-radius: 9999px; /* Fully rounded corners */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); /* Shadow effect */
 }
 
+/* Grid layout styles */
 .grid {
-    display: grid;
-    gap: 1rem;
+    display: grid; /* Use grid for layout */
+    gap: 1rem; /* Space between grid items */
 }
 
 .grid-cols-6 {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr)); /* 6 equal columns */
 }
 
 .grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 equal columns */
 }
 
 .grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 equal columns */
 }
 
-
+/* Card styles */
 .card {
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    margin:10px;
-    
+    background-color: white; /* Card background */
+    border-radius: 5px; /* Rounded corners */
+    padding: 1rem; /* Padding inside cards */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); /* Shadow effect */
+    margin: 10px; /* Margin around cards */
 }
 
+/* Recommendation container styles */
+.recommendations-container {
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Distribute space evenly */
+    align-items: stretch; /* Stretch items to fill container */
+    padding: 16px; /* Padding inside the container */
+    margin-top: 20px; /* Space above recommendations */
+}
+
+/* Metric title styles */
 .metric-title {
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-size: 0.875rem; /* Font size for metric titles */
+    font-weight: 600; /* Bold metric title */
+    margin-bottom: 0.5rem; /* Space below metric title */
 }
 
+/* Metric value styles */
 .metric-value {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.5rem; /* Font size for metric values */
+    font-weight: bold; /* Bold metric value */
 }
 
+/* Metric unit styles */
 .metric-unit {
-    font-size: 0.875rem;
-    font-weight: normal;
+    font-size: 0.875rem; /* Font size for metric units */
+    font-weight: normal; /* Normal weight for metric units */
 }
 
+/* AQI bar styles */
 .aqi-bar {
-    width: 100%;
-    height: 1rem;
-    border-radius: 9999px;
-    margin-bottom: 0.5rem;
+    width: 100%; /* Full width */
+    height: 1rem; /* Height of the AQI bar */
+    border-radius: 9999px; /* Fully rounded corners */
+    margin-bottom: 0.5rem; /* Space below the AQI bar */
 }
 
+/* AQI value styles */
 .aqi-value {
-    font-size: 2.25rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    font-size: 2.25rem; /* Font size for AQI value */
+    font-weight: bold; /* Bold AQI value */
+    margin-bottom: 0.5rem; /* Space below AQI value */
 }
 
+/* AQI level styles */
 .aqi-level {
-    font-size: 1.125rem;
+    font-size: 1.125rem; /* Font size for AQI level */
 }
 
+/* AQI cause styles */
 .aqi-cause {
-    font-size: 0.875rem;
-    color: #6b7280;
+    font-size: 0.875rem; /* Font size for AQI cause */
+    color: #6b7280; /* Gray color */
 }
 
+/* Chart container styles */
 .chart-container {
-    width: 100%;
-    height: 200px;
+    width: 100%; /* Full width */
+    height: 200px; /* Fixed height for charts */
 }
 
+/* Recommendation title styles */
 .recommendation-title {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
+    font-size: 1.125rem; /* Font size for recommendation titles */
+    font-weight: 600; /* Bold recommendation title */
+    margin-bottom: 0.5rem; /* Space below recommendation title */
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center align items vertically */
 }
 
+/* Recommendation title icon styles */
 .recommendation-title svg {
-    margin-right: 0.5rem;
+    margin-right: 0.5rem; /* Space to the right of the icon */
 }
 
+/* Last updated styles */
 .last-updated {
-    margin-top: 1rem;
-    font-size: 0.875rem;
-    color: #6b7280;
+    margin-top: 1rem; /* Space above last updated text */
+    font-size: 0.875rem; /* Font size for last updated text */
+    color: #6b7280; /* Gray color */
 }
 
+/* Background color styles */
 .bg-green-500 {
-    background-color: #22c55e;
+    background-color: #22c55e; /* Green background */
 }
 
 .bg-yellow-500 {
-    background-color: #f59e0b;
+    background-color: #f59e0b; /* Yellow background */
 }
 
 .bg-orange-500 {
-    background-color: #f97316;
+    background-color: #f97316; /* Orange background */
 }
 
 .bg-red-500 {
-    background-color: #ef4444;
+    background-color: #ef4444; /* Red background */
 }
 
 .bg-purple-500 {
-    background-color: #a855f7;
+    background-color: #a855f7; /* Purple background */
 }
 
 .bg-maroon-500 {
-    background-color: #7f1d1d;
-}
-html, body {
-  margin: 0;
-  padding: 0;
-  border:0;
-  overflow-x: hidden; /* Prevent horizontal overflow */
-  min-width:2480px;
+    background-color: #7f1d1d; /* Maroon background */
 }
 
-.recommendations-container {
-  margin-top: 20px; /* Adjusts spacing above the recommendations */
-  padding: 10px; /* Optional: adds some padding */
+/* Metric card styles */
+.metric-card {
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Space between metric card items */
+    align-items: center; /* Center align items vertically */
+}
+
+/* Metric content styles */
+.metric-content {
+    flex-grow: 1; /* Allow content to grow */
+}
+
+/* Metric icon styles */
+.metric-icon {
+    width: 24px; /* Icon width */
+    height: 24px; /* Icon height */
+    margin-left: 10px; /* Space to the left of the icon */
+}
+
+/* AQI card styles */
+.aqi-card {
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+}
+
+/* AQI content styles */
+.aqi-content {
+    display: flex; /* Flexbox for layout */
+    align-items: center; /* Center align items vertically */
+}
+
+/* AQI info styles */
+.aqi-info {
+    margin-left: 20px; /* Space to the left of AQI info */
 }
