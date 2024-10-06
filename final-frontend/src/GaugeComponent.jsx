@@ -3,7 +3,7 @@ import React from 'react';
 import { GaugeComponent } from 'react-gauge-component';
 
 const CustomGauge = ({ value }) => {
-  const SIZE_FACTOR = 1.7; // Change this value to resize everything (e.g., 0.5 for smaller, 1 for default size)
+  const SIZE_FACTOR = 3; // Change this value to resize everything (e.g., 0.5 for smaller, 1 for default size)
 
   return (
     <GaugeComponent
@@ -63,8 +63,8 @@ const CustomGauge = ({ value }) => {
       }}
       pointer={{
         color: '#345243',
-        length: 0.6 * SIZE_FACTOR, // Adjust length with size factor
-        width: 10 * SIZE_FACTOR,   // Adjust width with size factor
+        length: 0.3 * SIZE_FACTOR, // Adjust length with size factor
+        width: 3 * SIZE_FACTOR,   // Adjust width with size factor
       }}
       // labels={{
       //   valueLabel: { formatTextValue: value => value + ' AQI', fontSize: 12 * SIZE_FACTOR }, // Adjust font size
