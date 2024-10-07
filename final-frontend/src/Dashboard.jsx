@@ -10,6 +10,7 @@ const Dashboard = () => {
   const [aqiRecommendation, setAqiRecommendation] = useState(null);
   const [location, setLocation] = useState('Coimbatore, Tamilnadu');
   const [lastUpdated, setLastUpdated] = useState('');
+  const [showPopup, setShowPopup] = useState(true); // Popup visibility state
 
   const fetchData = async () => {
     try {
@@ -86,9 +87,22 @@ const Dashboard = () => {
   };
 
   if (!data || !aqiRecommendation) return <div>Loading...</div>; // Display loading or message if data is not available
+  const closePopup = () => {
+    setShowPopup(false);
+  };
 
   return (
+    
     <div className="container">
+      {/* Custom Popup */}
+      {showPopup && (
+        <div className="popup-overlay" onClick={closePopup}>
+          <div className="popup-content">
+            <p className="popup-text">Alert: Air Quality Danger!</p>
+            <button onClick={closePopup} className="popup-close">Close</button>
+          </div>
+        </div>
+      )}
       <div className="header">
         <h1 className="title">Dashboard</h1>
         <div className="location">
