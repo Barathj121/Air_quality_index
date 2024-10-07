@@ -1,0 +1,79 @@
+/* SideNav.css */
+.sidenav {
+    width: 250px;
+    height: 100vh;
+    background-color: #2C3E50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: width 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sidenav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .sidenav ul li {
+    width: 100%;
+  }
+  
+  .sidenav ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: #ECF0F1;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+    width: calc(100% - 40px); /* Keeps the padding within bounds */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .sidenav ul li a:hover {
+    background-color: #1ABC9C;
+    color: #ffffff;
+    padding-left: 25px; /* Adds a slight indent on hover */
+  }
+  
+  .sidenav ul li a.active {
+    background-color: #16A085;
+    color: #ffffff;
+    font-weight: 600;
+    padding-left: 25px;
+  }
+  
+  .sidenav ul li a:focus {
+    outline: none;
+  }
+  
+  .sidenav ul li a .icon {
+    margin-right: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .sidenav {
+      width: 60px;
+      padding-top: 10px;
+    }
+  
+    .sidenav ul li a {
+      padding: 10px;
+      text-align: center;
+      font-size: 16px;
+    }
+  
+    .sidenav ul li a .text {
+      display: none;
+    }
+  }
+  

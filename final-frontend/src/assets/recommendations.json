@@ -1,0 +1,68 @@
+[
+  {
+      "range": [0, 50],
+      "recommendation": "Air quality is considered satisfactory, and air pollution poses little or no risk.",
+      "healthAdvice": "Enjoy outdoor activities, no restrictions.",
+      "travelSuggestion": "Good conditions for travel, no precautions needed.",
+      "maskImage": "path/to/your/icons/mask_good.png",
+      "windowsOpen": "Yes, it's safe to keep windows open.",
+      "purifierRequired": "No air purifier needed.",
+      "sensitiveGroupsMask": "No mask required for sensitive groups.",
+      "sensitiveGroupsImage": "path/to/your/icons/mask_no_needed.png" 
+  },
+  {
+      "range": [51, 100],
+      "recommendation": "Air quality is acceptable; however, there may be a concern for some pollutants for a very small number of people who are unusually sensitive to air pollution.",
+      "healthAdvice": "People with respiratory or heart conditions should limit prolonged outdoor exertion.",
+      "travelSuggestion": "Travel is fine, but sensitive individuals should limit outdoor activities.",
+      "maskImage": "path/to/your/icons/mask_moderate.png",
+      "windowsOpen": "Yes, but monitor air quality closely.",
+      "purifierRequired": "Consider using an air purifier indoors.",
+      "sensitiveGroupsMask": "Masks may be required for sensitive groups.",
+      "sensitiveGroupsImage": "path/to/your/icons/mask_sensitive.png" 
+  },
+  {
+      "range": [101, 150],
+      "recommendation": "Air quality is unhealthy for sensitive groups. Members of sensitive groups may experience health effects.",
+      "healthAdvice": "People with respiratory or heart conditions, children, and older adults should limit prolonged outdoor exertion.",
+      "travelSuggestion": "Travel is fine, but sensitive individuals should limit time outdoors.",
+      "maskImage": "src/assets/icons/mask-required.png",
+      "windowsOpen": "Keep windows closed to prevent outdoor air from entering.",
+      "purifierRequired": "Use an air purifier indoors.",
+      "sensitiveGroupsMask": "Masks are recommended for sensitive groups.",
+      "sensitiveGroupsImage": "path/to/your/icons/mask_required.png" 
+  },
+  {
+      "range": [151, 200],
+      "recommendation": "Air quality is unhealthy. Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.",
+      "healthAdvice": "Everyone should limit prolonged outdoor exertion.",
+      "travelSuggestion": "Limit outdoor travel, particularly for sensitive individuals.",
+      "maskImage": "path/to/your/icons/mask_unhealthy.png",
+      "windowsOpen": "Keep windows closed.",
+      "purifierRequired": "Use air purifiers to improve indoor air quality.",
+      "sensitiveGroupsMask": "Masks are required for sensitive groups.",
+      "sensitiveGroupsImage": "path/to/your/icons/mask_required.png" 
+  },
+  {
+      "range": [201, 300],
+      "recommendation": "Air quality is very unhealthy. Health alert: everyone may experience more serious health effects.",
+      "healthAdvice": "Avoid outdoor exertion, stay indoors.",
+      "travelSuggestion": "Avoid travel and outdoor activities.",
+      "maskImage": "path/to/your/icons/mask_very_unhealthy.png",
+      "windowsOpen": "Keep windows closed tightly.",
+      "purifierRequired": "Air purifiers are essential indoors.",
+      "sensitiveGroupsMask": "Masks are essential for sensitive groups.",
+      "sensitiveGroupsImage": "path/to/your/icons/mask_required.png" 
+  },
+  {
+      "range": [301, 500],
+      "recommendation": "Air quality is hazardous. Health warnings of emergency conditions. The entire population is more likely to be affected.",
+      "healthAdvice": "Everyone should avoid all outdoor exertion.",
+      "travelSuggestion": "Avoid all travel and stay indoors.",
+      "maskImage": "path/to/your/icons/mask_hazardous.png",
+      "windowsOpen": "Do not open windows.",
+      "purifierRequired": "Use air purifiers continuously indoors.",
+      "sensitiveGroupsMask": "Masks are critical for sensitive groups.",
+      "sensitiveGroupsImage": "psrc/assets.icons/mask_required.png" 
+  }
+]

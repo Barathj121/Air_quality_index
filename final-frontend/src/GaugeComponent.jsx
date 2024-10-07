@@ -3,7 +3,7 @@ import React from 'react';
 import { GaugeComponent } from 'react-gauge-component';
 
 const CustomGauge = ({ value }) => {
-  const SIZE_FACTOR = 3; // Change this value to resize everything (e.g., 0.5 for smaller, 1 for default size)
+  const SIZE_FACTOR = 3.4; // Change this value to resize everything (e.g., 0.5 for smaller, 1 for default size)
 
   return (
     <GaugeComponent
