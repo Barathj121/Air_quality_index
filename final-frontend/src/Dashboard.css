@@ -42,11 +42,12 @@
 
 /* Card styles */
 .card {
-    background-color: white; /* Card background */
+    background-color: #FDF7F4;
     border-radius: 5px; /* Rounded corners */
     padding: 1rem; /* Padding inside cards */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); /* Shadow effect */
     margin: 10px; /* Margin around cards */
+    white-space: pre-wrap;
 }
 
 /* Recommendation container styles */
@@ -57,6 +58,7 @@
     align-items: stretch; /* Stretch items to fill container */
     padding: 16px; /* Padding inside the container */
     margin-top: 20px; /* Space above recommendations */
+    line-height: 1.5;
 }
 
 /* Metric title styles */
@@ -64,6 +66,7 @@
     font-size: 0.875rem; /* Font size for metric titles */
     font-weight: 600; /* Bold metric title */
     margin-bottom: 0.5rem; /* Space below metric title */
+    color:rgb(56, 116, 120);
 }
 
 /* Metric value styles */
@@ -95,13 +98,22 @@
 
 /* AQI level styles */
 .aqi-level {
-    font-size: 1.125rem; /* Font size for AQI level */
+    font-size: 1.5rem; /* Font size for AQI level */
+    padding: 0%;
+    margin:0px;
 }
 
 /* AQI cause styles */
 .aqi-cause {
     font-size: 0.875rem; /* Font size for AQI cause */
     color: #6b7280; /* Gray color */
+    margin:0px;
+}
+
+.image-text {
+    font-size: 0.875rem; /* Font size for AQI cause */
+    color: #6b7280; /* Gray color */
+    margin:5px;
 }
 
 /* Chart container styles */
@@ -136,6 +148,7 @@
     display: flex; /* Flexbox for layout */
     justify-content: space-between; /* Space between metric card items */
     align-items: center; /* Center align items vertically */
+    background-color: rgb(226, 241, 231);
 }
 
 /* Metric content styles */
@@ -159,22 +172,45 @@
 .aqi-card {
     display: flex; /* Flexbox for layout */
     flex-direction: column; /* Stack items vertically */
+    background-color: #FDF7F4;
+}
+
+.line-spacing{
+    line-height:2;
+    margin:0px;
+    padding-left: 1.9rem;
+}
+.below-name-style{
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    padding: 0%;
+}
+.inside-box{
+    background-color: rgba(161, 175, 166, 0.485);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom:1px;
 }
 
 /* AQI content styles */
 .aqi-content {
     display: flex; /* Flexbox for layout */
     align-items: center; /* Center align items vertically */
+    justify-content: center; /* Center align items horizontally */
+    margin-bottom: -40px;
 }
 
 /* AQI info styles */
 .aqi-info {
     margin-left: 20px; /* Space to the left of AQI info */
+    padding-bottom: 20px;
 }
 
 .center-text-metergauge{
     text-align: center;
-    font-size: large;
+    font-size: 30px;
 
 }
 
@@ -223,3 +259,43 @@
     background-color: #d43a3a;
   }
   
+  .recommendations-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 16px;
+    margin-top: 20px;
+    line-height: 1.5;
+  }
+  
+  div.recommendations-icons {
+    margin-top:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 3px grey; /* Combine border properties */
+    border-radius: 10px;
+  }
+  
+  
+  .recommendation-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1rem;
+    margin-top: 1rem;
+
+    padding:0px 5px 0px 5px;
+  }
+  
+  .recommendation-icon img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .recommendation-icon p {
+    font-size: 0.875rem;
+    text-align: center;
+  }

@@ -17,7 +17,8 @@ const Dashboard = () => {
       const response = await fetch("http://localhost:3030/api/aqi/latest");
       if (!response.ok) throw new Error("API not responding");
       const json = await response.json();
-
+      console.log(json.data);
+    
       // Extract and set the API data
       const apiData = {
         PM25: json.data['PM2.5'],
@@ -33,11 +34,13 @@ const Dashboard = () => {
         WindDirection: json.data['WD'],
         SolarRadiation: json.data['SR'],
         AQI: json.data['AQI'],
+        timestamp: json.data['timestamp'],
+        cause: json.data['cause'],
       };
 
       setData(apiData);
       setAqiRecommendation(getAQIRecommendation(apiData.AQI));
-      setLastUpdated(new Date().toLocaleString());
+      setLastUpdated(new Date(apiData.timestamp).toLocaleString());
 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -56,6 +59,7 @@ const Dashboard = () => {
         WindDirection: 45,
         SolarRadiation: 172,
         AQI: 45,
+        cause: 0,
       };
       setData(dummyData);
       setAqiRecommendation(getAQIRecommendation(dummyData.AQI));
@@ -78,18 +82,35 @@ const Dashboard = () => {
   };
 
   const getAQILevel = (aqi) => {
-    if (aqi <= 50) return 'Good';
-    if (aqi <= 100) return 'Moderate';
-    if (aqi <= 150) return 'Unhealthy for Sensitive Groups';
-    if (aqi <= 200) return 'Unhealthy';
-    if (aqi <= 300) return 'Very Unhealthy';
-    return 'Hazardous';
+    if (aqi <= 50) return { level: 'Good', color: '#5BE12C' };
+    if (aqi <= 100) return { level: 'Satisfactory', color: '#F5CD19' };
+    if (aqi <= 150) return { level: 'Moderately Polluted', color: '#FFA500' };
+    if (aqi <= 200) return { level: 'Poor', color: '#EA4228' };
+    if (aqi <= 300) return { level: 'Very Poor', color: '#800080' };
+    return { level: 'Hazardous', color: '#7B241C' };
   };
+  
 
   if (!data || !aqiRecommendation) return <div>Loading...</div>; // Display loading or message if data is not available
   const closePopup = () => {
     setShowPopup(false);
   };
+
+  
+  const PrimaryCause = (cause) => {
+    console.log("cause ==>",cause);
+    if (cause === 0 )return 'PM 2.5';
+    if (cause === 1 )return 'PM10';
+    if (cause === 2 )return 'NO2';
+    if (cause === 3 )return 'SO2';
+    if (cause === 4 )return 'CO';
+    if (cause === 5 )return 'Ozone';
+    return 'Various Pollutants';
+
+
+  };
+
+
 
   return (
     
@@ -113,7 +134,7 @@ const Dashboard = () => {
       <p className="last-updated">Last updated: {lastUpdated}</p>
 
       <div className="grid grid-cols-6">
-        {['PM2.5', 'PM10', 'NO2', 'SO2', 'CO', 'Ozone'].map((metric, index) => (
+        {['PM25', 'PM10', 'NO2', 'SO2', 'CO', 'Ozone'].map((metric, index) => (
           <div key={index} className="card metric-card">
             <div className="metric-content">
               <h3 className="metric-title">{metric}</h3>
@@ -125,7 +146,7 @@ const Dashboard = () => {
       </div>
 
       <div className="grid grid-cols-6">
-        {['Temperature', 'Pressure', 'Humidity', 'Wind Speed', 'Wind Direction', 'Solar Radiation'].map((metric, index) => (
+        {['Temperature', 'Pressure', 'Humidity', 'WindSpeed', 'WindDirection', 'SolarRadiation'].map((metric, index) => (
           <div key={index} className="card metric-card">
             <div className="metric-content">
               <h3 className="metric-title">{metric}</h3>
@@ -143,38 +164,60 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-2">
         <div className="card col-span-1 aqi-card">
-          <h1 className="metric-title center-text-metergauge">Air Quality Index</h1>
+          <h1 className="metric-title center-text-metergauge">Air Quality Index (AQI) </h1>
           <div className="aqi-content">
             <CustomGauge value={data.AQI} />
           </div>
-          <div className="aqi-info">
-            <p className="aqi-level">Overall Air Quality: {getAQILevel(data.AQI)}</p>
-            <p className="aqi-cause">Primary Cause: PM2.5</p>
-            <img src={aqiRecommendation.maskImage} alt="Mask Recommendation" className='metric-icon2' />
 
-            <p>Windows: {aqiRecommendation.windowsOpen}</p>
-            <p>Air Purifier: {aqiRecommendation.purifierRequired}</p>
-            {/* <img src={aqiRecommendation.sensitiveGroupsImage} alt="Sensitive Group Mask Image" className="recommendation-icon" /> */}
+          <div className="aqi-info">
+            <center><p className="below-name-style"><b>AQI: {data.AQI}</b></p></center>
+            <center><p className="aqi-level" style={{ color: getAQILevel(data.AQI).color }}><b>{getAQILevel(data.AQI).level}</b></p></center>
+           <center> <p className="aqi-cause"><b>Primary Cause: </b>{PrimaryCause(data.cause)}</p></center>
+          </div>
+ 
+          <div class="recommendations-icons">
+            <div class="recommendation-icon">
+              <img src="src/assets/icons/solution_use-purifier.svg" alt="Air Purifier" />
+              <p className='image-text'><b>Air Purifier</b></p>
+              <p className='image-text'>{aqiRecommendation.airpurifier_suggestion}</p>
+            </div>
+            <div class="recommendation-icon">
+              <img src="src/assets/icons/solution_car-filter.svg" alt="Car Filter" />
+              <p className='image-text'><b>Car Filter</b></p>
+              <p className='image-text'>{aqiRecommendation.car_filter_suggestion}</p>
+            </div>
+            <div class="recommendation-icon">
+              <img src="src/assets/icons/solution_wear-mask.svg" alt="N95 Mask" />
+              <p className='image-text'><b>N95 Mask</b></p>
+              <p className='image-text'>{aqiRecommendation.n95_mask_suggestion}</p>
+            </div>
+            <div class="recommendation-icon">
+              <img src="src/assets/icons/solution_stay-indoor.svg" alt="Stay Indoor" />
+              <p className='image-text'><b>Stay Indoor</b></p>
+              <p className='image-text'>{aqiRecommendation.stay_indoor}</p>
+            </div>
           </div>
         </div>
 
-        <div className="recommendations-container col-span-1">
-          <div className="card">
+        <div className="recommendations-container col-span-1 ">
+          <div className="card line-spacing">
             <h3 className="recommendation-title">
               <AlertCircle /> Recommendations
             </h3>
-            <p>{aqiRecommendation?.recommendation || 'No recommendations available.'}</p>
-            <p >Mask Recommendation: {aqiRecommendation.sensitiveGroupsMask}</p>
-          </div>
+            {aqiRecommendation?.recommendation || 'No recommendations available.'}<br></br>
+            {/* {aqiRecommendation.sensitiveGroupsMask}<br></br> */}
+            {aqiRecommendation.windowsOpen}<br></br>
+            {/* {aqiRecommendation.purifierRequired} */}
+            </div>
 
-          <div className="card">
+          <div className="card line-spacing">
             <h3 className="recommendation-title">
               <Activity /> Health Advice
             </h3>
             <p>{aqiRecommendation?.healthAdvice || 'No health advice available.'}</p>
           </div>
 
-          <div className="card">
+          <div className="card line-spacing">
             <h3 className="recommendation-title">
               <Droplet /> Travel Suggestions
             </h3>

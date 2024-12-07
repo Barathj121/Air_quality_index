@@ -1,21 +1,37 @@
-// App.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Dashboard from './Dashboard'; // Import the Dashboard component
-import AdvancedAnalysis from './AdvancedAnalysis'; // Import the Advanced Analysis component
+import Dashboard from './Dashboard';
+import AdvancedAnalysis from './AdvancedAnalysis';
 import './app.css';
-import SideNav from './Sidenav'; // Adjust the path as necessary
+import SideNav from './Sidenav';
+import MapComponent from './MapComponent';
 
 const App = () => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [aqiStations, setAqiStations] = useState([]); // Initialize with empty array or fetch data
+
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+  };
+
   return (
     <Router>
       <div className="container">
-        <SideNav /> {/* Add the SideNav here */}
+        <SideNav />
         <div className="main-content">
           <Routes>
-            <Route path="/" element={<Dashboard />} /> {/* Dashboard route */}
-            <Route path="/advanced-analysis" element={<AdvancedAnalysis />} /> {/* Advanced Analysis route */}
-            {/* Define more routes here as needed */}
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/advanced-analysis" element={<AdvancedAnalysis />} />
+            <Route 
+              path="/map" 
+              element={
+                <MapComponent 
+                  aqiStations={aqiStations}
+                  isFullscreen={isFullscreen}
+                  toggleFullscreen={toggleFullscreen}
+                />
+              } 
+            />
           </Routes>
         </div>
       </div>

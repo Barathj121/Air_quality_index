@@ -84,7 +84,7 @@ const CustomGauge = ({ value }) => {
       value={value} // This should reflect the actual AQI value passed as a prop
       minValue={0}
       maxValue={500}
-      style={{ width: `${150 * SIZE_FACTOR}px`, height: `${75 * SIZE_FACTOR}px` }} // Set width and height based on size factor
+      style={{ width: `${150 * SIZE_FACTOR}px`, height: `${75 * SIZE_FACTOR}px` ,color:`black`}} // Set width and height based on size factor
     />
   );
 };

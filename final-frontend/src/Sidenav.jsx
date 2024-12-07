@@ -1,16 +1,14 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './SideNav.css';
+import { NavLink } from 'react-router-dom';
+import './Sidenav.css';
 
 const SideNav = () => {
-  const location = useLocation();
-  
   return (
     <nav className="sidenav">
       <ul>
-        <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Dashboard</Link></li>
-        <li><Link to="/advanced-analysis" className={location.pathname === '/advanced-analysis' ? 'active' : ''}>Advanced Analysis</Link></li>
-        {/* Add more links as needed */}
+        <li><NavLink to="/" end>Dashboard</NavLink></li>
+        <li><NavLink to="/advanced-analysis">AQI Forecast</NavLink></li>
+        <li><NavLink to="/map">Map</NavLink></li>
       </ul>
     </nav>
   );

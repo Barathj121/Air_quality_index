@@ -1,53 +1,16 @@
-import React, { useState, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+// AdvancedAnalysis.jsx
+import React, { useState } from 'react';
 import { Line, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import 'leaflet/dist/leaflet.css';
 import './AdvancedAnalysis.css';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement);
 
 const AdvancedAnalysis = () => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const mapRef = useRef(null);
-
-  const toggleFullscreen = () => {
-    if (!isFullscreen) {
-      const mapContainer = mapRef.current;
-      if (mapContainer.requestFullscreen) {
-        mapContainer.requestFullscreen();
-      } else if (mapContainer.mozRequestFullScreen) {
-        mapContainer.mozRequestFullScreen();
-      } else if (mapContainer.webkitRequestFullscreen) {
-        mapContainer.webkitRequestFullscreen();
-      } else if (mapContainer.msRequestFullscreen) {
-        mapContainer.msRequestFullscreen();
-      }
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      }
-    }
-    setIsFullscreen(!isFullscreen);
-  };
-
-  const aqiStations = [
-    { position: [11.0168, 76.9558], name: "Coimbatore Central" },
-    { position: [11.0317, 77.0334], name: "Kurichi" },
-    { position: [11.0235, 76.9502], name: "R.S. Puram" },
-    { position: [11.0016, 76.9731], name: "Peelamedu" },
-    { position: [11.0210, 77.0021], name: "Ganapathy" },
-  ];
 
   const aqiForecastData = {
     labels: ['12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'],
@@ -66,14 +29,6 @@ const AdvancedAnalysis = () => {
       data: [80, 82, 85, 87, 85, 83],
       borderColor: 'rgb(255, 99, 132)',
       tension: 0.1
-    }]
-  };
-
-  const smartAlertData = {
-    labels: ['Good', 'Moderate', 'Unhealthy for Sensitive Groups', 'Unhealthy', 'Very Unhealthy', 'Hazardous'],
-    datasets: [{
-      data: [15, 30, 25, 15, 10, 5],
-      backgroundColor: ['#00E400', '#FFFF00', '#FF7E00', '#FF0000', '#8F3F97', '#7E0023']
     }]
   };
 
@@ -116,33 +71,36 @@ const AdvancedAnalysis = () => {
 
   return (
     <div className="advanced-analysis">
-      <h1>Advanced Analysis</h1>
+      <h1>AQI Forecast</h1>
       
-      <div className={`map-container ${isFullscreen ? 'fullscreen' : ''}`} ref={mapRef}>
-        <button onClick={toggleFullscreen} className="fullscreen-toggle">
-          {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
-        </button>
-        <MapContainer center={[11.0168, 76.9558]} zoom={13} className="map">
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {aqiStations.map((station, index) => (
-            <Marker key={index} position={station.position}>
-              <Popup>{station.name}</Popup>
-            </Marker>
-          ))}
-        </MapContainer>
-      </div>
-
       <div className="charts-container">
         <div className="chart">
-          <h2>AQI Forecast Trend</h2>
+          <center><h2>AQI Forecast Trend</h2></center>
           <Line data={aqiForecastData} />
         </div>
         <div className="chart">
-          <h2>Real-time Data</h2>
+          <center><h2>Real-time Data</h2></center>
           <Line data={realtimeData} />
         </div>
       </div>
 
+      <div className="alert-boxes">
+        <div className="aqi-alert">
+          <h3>AQI Alert</h3>
+          <p>Current AQI: 85 (Moderate)</p>
+          <p>Main Pollutant: PM2.5</p>
+          <p>Take necessary precautions if you're sensitive to air pollution.</p>
+        </div>
+
+        <div className="smart-alert">
+          <center><h3>Smart Alert</h3></center>
+          <p>Pollution increase likely in the next 6 hours</p>
+          <div className="pollution-graph">
+            <Line data={pollutionIncreaseData} />
+          </div>
+        </div>
+      </div>
+      
       <div className="data-table">
         <h2>Historical Data</h2>
         <div className="date-pickers">
@@ -172,30 +130,7 @@ const AdvancedAnalysis = () => {
           </tbody>
         </table>
       </div>
-
-      <div className="alert-boxes">
-        <div className="aqi-alert">
-          <h3>AQI Alert</h3>
-          <p>Current AQI: 85 (Moderate)</p>
-          <p>Main Pollutant: PM2.5</p>
-          <p>Take necessary precautions if you're sensitive to air pollution.</p>
-        </div>
-
-        <div className="smart-alert">
-          <h3>Smart Alert</h3>
-          <p>Pollution increase likely in the next 6 hours</p>
-          <div className="pollution-graph">
-            <Line data={pollutionIncreaseData} />
-          </div>
-        </div>
-      </div>
-      {/* <h4>AQI Level Probabilities</h4> */}
-
-      {/* <div className="pie-chart">
-            <Pie data={smartAlertData} />
-          </div> */}
     </div>
-    
   );
 };
 
